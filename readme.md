@@ -1,6 +1,8 @@
 # Robert Thurston - Simulated Parallel Processing
 
 ## Overview
+This project was an assignment for a class I took, Computer Systems Principles (Comp 230) at UMass Amherst. I've included the file for the project documentation in this repository: `Simulated Parallel Processing`. I decided to upload this project because I thought it was super cool.
+
 This project demonstrates a multi-core task management system in C, utilizing pipes, signals, and processes to distribute tasks among multiple cores. The main process then aggregates the results from each core. The project is designed to use three separate cores, but it can be easily adjusted to handle up to 31 processes by modifying the `NUM_CORE` variable. The program outputs the number of tasks completed by each core process and the sum of the task IDs.
 
 ## Project Requirments
