@@ -241,7 +241,7 @@ void runCore(int input, int output, int maxTime, int core) {
 int main(int argc, char* argv[]) {
     // Checks for invalid number of program arguments
     if (argc != 3) {
-        printf("Invalid number of program args\n");
+        printf("Invalid number of program args: ./main <num_of_tasks> <max_process_time>\n");
         exit(EXIT_FAILURE);
     }
 
