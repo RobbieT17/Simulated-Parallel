@@ -45,7 +45,7 @@ void no_interrupt_sleep(int sec) {
 void handleResult(int sig) {
     int id = sig - SIGRTMIN; // Identifies core
     msgFromCore[id] = 1;
-    printf("(MAIN) recieved signal SIGRTMIN + %d from core %d\n", id, id);    
+    printf("(MAIN) received signal SIGRTMIN + %d from core %d\n", id, id);    
 }
 
 // *** SYSTEM CALL FUNCTIONS *** //
@@ -58,7 +58,7 @@ long convertToLong(char* string) {
     errno = 0;
     long value = strtol(string, NULL, 10);
 
-    if (errno != 0) { // Some error occured
+    if (errno != 0) { // Some error occurred
         printf("(PID: %d) failed to convert to long\n", getpid());
         exit(EXIT_FAILURE);
     }
@@ -88,7 +88,7 @@ void createPipe(int fds[], char* string, int i) {
     errno = 0;
 
     pipe(fds);
-    if (errno != 0) { // An error occured
+    if (errno != 0) { // An error occurred
         printf("(PID: %d) failed to create pipe\n", getpid());
         exit(EXIT_FAILURE);
     }
@@ -108,7 +108,7 @@ void registerSignalHandler(int i) {
 
     errno = 0;
     sigaction(SIGRTMIN + i, &sa, NULL); 
-    if (errno != 0) { // An error occured
+    if (errno != 0) { // An error occurred
         printf("(PID %d) failed to create signal handler\n", getpid());
         exit(EXIT_FAILURE);
     }
@@ -126,7 +126,7 @@ int readFromPipe(int input, int buffer) {
     errno = 0;
     read(input, &buffer, sizeof(buffer));
 
-    if (errno != 0) { // Some error occured
+    if (errno != 0) { // Some error occurred
         printf("(PID: %d) read call failed <fd: %d>\n", getpid(), input);
         exit(EXIT_FAILURE);
     }
@@ -144,7 +144,7 @@ int writeToPipe(int output, int buffer) {
     errno = 0;
 
     int result = write(output, &buffer, sizeof(buffer));
-    if (errno != 0) { // Some error occured
+    if (errno != 0) { // Some error occurred
         printf("(PID: %d) write call failed\n", getpid());
         exit(EXIT_FAILURE);
     }
@@ -170,7 +170,7 @@ void sendSignalToMain(int sig) {
 void waitForCore(pid_t pid) {
     errno = 0;
     waitpid(pid, NULL, 0);
-    if (errno != 0) { // Some error occured
+    if (errno != 0) { // Some error occurred
         printf("(PID: %d) failed to wait\n", getpid());
         exit(EXIT_FAILURE);
     }
@@ -241,7 +241,7 @@ void runCore(int input, int output, int maxTime, int core) {
 int main(int argc, char* argv[]) {
     // Checks for invalid number of program arguments
     if (argc != 3) {
-        printf("Invalid number of program args: ./main <num_of_tasks> <max_process_time>\n");
+        printf("Invalid number of program args\n");
         exit(EXIT_FAILURE);
     }
 
@@ -372,7 +372,7 @@ int main(int argc, char* argv[]) {
                 coresStatus[i] = IDLE;
                 counters[i]++;
                 sum += result;
-                printf("(MAIN) recieved task %d from core %d <read from fd %d>\n", result, i, coresToMain[i][READ]);
+                printf("(MAIN) received task %d from core %d <read from fd %d>\n", result, i, coresToMain[i][READ]);
 
                 if (noTasks) { // Close read end, no more tasks
                     closePipeEnd(coresToMain[i], READ);
